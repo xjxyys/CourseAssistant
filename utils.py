@@ -314,8 +314,9 @@ class Solver(ABC):
                 for section in course.sections:
                     section.features[4] = weight 
 
-        # 概率已经在特征向量中了，下面得到每个section的rating
+        # # 处理概率: 选课社区评分 * 概率偏好 + 选课社区评分 * 选上的概率 * (1 - 概率偏好)
         for section in Sections:
+            section.features[0] = section.features[0] * self.perference.prob_preferrence + section.features[0] * section.features[1] * (1 - self.perference.prob_preferrence)
             section.rating = self.rating_module(torch.tensor(section.features, dtype=torch.float32)).item()
 
     def update_model(self, rewards: list) -> None:
