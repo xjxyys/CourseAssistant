@@ -1,0 +1,6 @@
+*.log
+build/
+temp-*
+config/*.json
+!config/default.json
+rating_model.pkl

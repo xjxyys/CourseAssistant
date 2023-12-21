@@ -4,7 +4,7 @@ import out
 import pandas as pd
 import spider
 import itertools
-from PyQt5.QtWidgets import QApplication,QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QInputDialog, QMessageBox
 from PyQt5 import QtCore
 from utils import *
 import os
@@ -66,33 +66,17 @@ def get_rewards():
     labels = []    # load data
 
     while True:
-        if len(labels) == 0:
-            label = input('请输入你对最优课表的排序: 1 or 2')
-            if label not in ['1', '2']:
-                print('输入有误，请重新输入')
+        answer, ok = QInputDialog.getText(None, '输入', '您是否认为第一个课表优于第二个课表？\n输入y或n')
+        if ok:
+            if answer not in ['y', 'n']:
+                QMessageBox.information(None, '警告', '输入有误，请重新输入')
                 continue
             else:
-                labels.append(label)
-        if len(labels) == 1:
-            label = input('请输入你对次优课表的排序: 1 or 2')
-            if label not in ['1', '2']:
-                print('输入有误，请重新输入')
-                continue
-            elif label == labels[0]:
-                print('请输入与第一次输入不同的数字，以便展示排序差异')
-                answer = input('是否重新输入所有排序？y or n')
-                while answer not in ['y', 'n']:
-                    print('输入有误，请重新输入')
-                    answer = input('是否重新输入所有排序？y or n')
                 if answer == 'y':
-                    labels = []
-                    continue
+                    labels = [1, 2]
                 else:
-                    break
-            else:
-                labels.append(label)
-        if len(labels) == 2:
-            break
+                    labels = [2, 1]
+                break
     return labels
 
 
@@ -203,9 +187,9 @@ def confirmAll():
     schedule = Schedule()
     optimal_schedule = solver.solve(schedule, 2, True)
     if len(optimal_schedule)==0:
-        print('--------------- no solution ---------------')
+        QMessageBox.information(None, '提示', '没有可行的课表，请重新输入!')
         return
-    print('--------------- finished ---------------')
+    QMessageBox.information(None, '提示', '已生成课表，请在out文件夹中查看！')
     schedule_rating = optimal_schedule[0].get_schedule_rating()
     print(f'--------------- rating: {schedule_rating} --and--explored: {solver.explored} ---------------')
     #optimal_schedule[0].draw()
@@ -219,12 +203,11 @@ def confirmAll():
     if is_update:
         rewards = get_rewards()
         solver.update_model(rewards)
-        print('--------------- updated ---------------')
-        
-    #### 是否要更新模型，如果需要，请取消注释
-    # rewards = get_rewards()
-    # solver.update_model(rewards)
-    # print('--------------- updated ---------------')
+        if rewards == [1, 2]:
+            QMessageBox.information(None, '提示', '谢谢您的反馈！')
+        else:
+            QMessageBox.information(None, '提示', '谢谢您的反馈，模型已更新')
+
     
     MainWindow = QMainWindow()
     out_interface = out.Ui_MainWindow()
