@@ -25,8 +25,8 @@
 * 创建一个虚拟环境并激活：
 
   ```
-  conda create -n CourseAssistant python=3.11
-  conda activte CourseAssistant
+  conda create -n ReCourse python=3.11
+  conda activte Recourse
   ```
 
 * 安装对应cuda版本的[pytorch](https://pytorch.org/)，例如：
