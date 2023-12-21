@@ -9,6 +9,16 @@ from PyQt5 import QtCore
 from utils import *
 import os
 import time
+import argparse
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--is_update', type=bool, default=False, help='whether to update the model')
+# 解析命令行参数
+args = parser.parse_args()
+is_update = args.is_update
+
+
 wd = os.path.dirname(__file__)
 os.chdir(wd)
 QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
@@ -39,7 +49,7 @@ def load_course():
             if course.id == row[2]:
                 time_slot = row[6].split('|')[0]
                 teacher = row[3]
-                course.sections.append(Section(course, time_slot, float(row[9]), float(row[10]), teacher, all_teachers))
+                course.sections.append(Section(course, time_slot, float(row[9]), float(row[11]), teacher, all_teachers))
                 break
 
     # 读取课程列表，并添加到课程偏好的选项中
@@ -199,11 +209,18 @@ def confirmAll():
     schedule_rating = optimal_schedule[0].get_schedule_rating()
     print(f'--------------- rating: {schedule_rating} --and--explored: {solver.explored} ---------------')
     #optimal_schedule[0].draw()
+
     for i in os.listdir('out'):
         os.remove('out\\'+i)
     for i in range(len(optimal_schedule)):
         optimal_schedule[i].draw(i+1)
 
+    #### 是否要更新模型，如果需要，请在运行程序时加上参数 --is_update=True
+    if is_update:
+        rewards = get_rewards()
+        solver.update_model(rewards)
+        print('--------------- updated ---------------')
+        
     #### 是否要更新模型，如果需要，请取消注释
     # rewards = get_rewards()
     # solver.update_model(rewards)
