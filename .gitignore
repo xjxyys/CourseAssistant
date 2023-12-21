@@ -3,4 +3,4 @@ build/
 temp-*
 config/*.json
 !config/default.json
-rating_model.pkl
+rating_module.pkl
