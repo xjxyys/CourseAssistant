@@ -94,7 +94,7 @@ def spider():
 
 def get_data():
     # df1 = pd.read_csv('found_records_manual.csv', encoding='utf-8-sig')
-    df1= pd.read_csv('found_records_manual.csv', encoding='ANSI')
+    df1= pd.read_csv('found_records_manual.csv', encoding='utf-8')
     df1 = df1[df1["年级"] == '2022']
     # df1["概率"] = 1
     df2 = copy.deepcopy(df1)
