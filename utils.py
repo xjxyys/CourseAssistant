@@ -305,7 +305,7 @@ class Solver(ABC):
                 for section_c in Sections:
                     for section_t in self.teachers[teacher]:
                         if section_c.teacher == section_t.teacher and section_c.time_slot == section_t.time_slot:
-                            section_c.features[1] = 1
+                            section_c.features[1] = 2
 
                 # for section in self.teachers[teacher]:
                 #     print('finish adding one teacher!')
