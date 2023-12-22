@@ -209,7 +209,7 @@ class Solver(ABC):
         # 需要对课程进行拷贝，否则会改变原来的课程
         self.courses = copy.deepcopy(courses) # 未分配的课程
         # self.schedule = schedule # 一个空的课程表，这是一个动态的概念
-        self.tearchers = teachers 
+        self.teachers = teachers 
         self.perference = perference
         self.explored = 0 # 已经探索的节点数
         # 如果已经存在rating_module，则直接加载
