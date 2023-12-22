@@ -39,6 +39,20 @@ out_interface.setupUi(MainWindow)
 
 def load_course():
     df1, df2 = spider.get_data()
+
+    # 读取课程列表，并添加到课程偏好的选项中
+    courses_name = list(set(df1["课程名称"]))
+    key = 0
+    for course in courses_name:
+        ui.comboBox_7.addItem("")
+        ui.comboBox_7.setItemText(key,course)
+        key += 1
+        
+    return None
+
+def get_course():
+    """读取课程信息"""
+    df1, df2 = spider.get_data()
     courses = []
     all_teachers= dict()
 
@@ -51,15 +65,6 @@ def load_course():
                 teacher = row[3]
                 course.sections.append(Section(course, time_slot, float(row[9]), float(row[11]), teacher, all_teachers))
                 break
-
-    # 读取课程列表，并添加到课程偏好的选项中
-    courses_name = list(set(df1["课程名称"]))
-    key = 0
-    for course in courses_name:
-        ui.comboBox_7.addItem("")
-        ui.comboBox_7.setItemText(key,course)
-        key += 1
-        
     return courses, all_teachers
 
 def get_rewards():
@@ -137,7 +142,9 @@ def showCoursePreference():
 
 
 def confirmAll():
-    global major_courses, other_courses, all_teachers
+    
+    courses, teachers = get_course()
+
     ui.widget_2.hide()
     ui.widget_3.hide()
     ui.widget_4.hide()
@@ -168,6 +175,7 @@ def confirmAll():
         elif ru[0] == 'dislike_time':
             userpreference.add_not_preferred_time(int(ru[1][0]),int(ru[1][1]),int(ru[1][2]))
         elif ru[0] == 'like_teacher':
+            # print('adding a teacher!')
             userpreference.add_preferred_teacher(ru[1])
         elif ru[0] == 'like_course':
             for course in courses:
@@ -179,11 +187,20 @@ def confirmAll():
 
     # 更新出用户要选的课
     selected_courses = [x[0] for x in userpreference.courses_preference]
-    courses_copy = copy.deepcopy(selected_courses)
-    teachers = copy.deepcopy(all_teachers)
+
+    # 拷贝courses和teachers
+    # courses_copy = copy.deepcopy(selected_courses)
+    # new_teachers = dict()
+    # for course in courses_copy:
+    #     for section in course.sections:
+    #         if section.teacher not in new_teachers:
+    #             new_teachers[section.teacher] = [section]
+    #         else:
+    #             new_teachers[section.teacher].append(section)
+
     # solver = optimal_naive_Solver(courses_copy, userpreference, teachers)
     # solver = optimal_forward_checking_Solver(courses_copy, userpreference, teachers)
-    solver = optimal_AC3_Solver(courses_copy, userpreference, teachers)
+    solver = optimal_AC3_Solver(selected_courses, userpreference, teachers)
     schedule = Schedule()
     optimal_schedule = solver.solve(schedule, 2, True)
     if len(optimal_schedule)==0:
@@ -219,8 +236,8 @@ def confirmAll():
 
 
 if __name__ == '__main__':
-
-    courses, all_teachers = load_course()   
+    # 载入课程
+    load_course()   
     
     #初始化所有widget都隐藏
     ui.widget_2.hide()

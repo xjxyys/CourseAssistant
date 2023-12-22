@@ -33,7 +33,7 @@ class Section:
         self.prob = prob # 选上课的概率
         self.rating = initial_rating  # 评分，初始值为选课社区评分
 
-        self.features = [self.initial_rating, self.prob, 0, 0, 0] # 特征向量(选课社区评分，选上的概率，是否喜欢老师，是否喜欢这个时间，课程偏好)
+        self.features = [self.initial_rating, 0, 0, 0] # 特征向量(构造的评分，是否喜欢老师，是否喜欢这个时间，课程偏好)
 
         all_teachers[self.teacher] = all_teachers.get(self.teacher, []) + [self] # 记录该section的老师
         # 处理时间安排，整合成slots
@@ -216,9 +216,10 @@ class Solver(ABC):
         if os.path.exists('rating_module.pkl'):
             self.rating_module = torch.load('rating_module.pkl')
         else:
-            self.rating_module = RatingModule(5)
+            # self.rating_module = RatingModule(5)
+            self.rating_module = RatingModule(4)
         
-        self.rating_module.set_initial_weight(torch.tensor([1, -1, 0.5, 0.5, 0.5], dtype=torch.float32))
+        self.rating_module.set_initial_weight(torch.tensor([1, 2, 2, 1], dtype=torch.float32))
     
     def get_explored(self) -> int:
         return self.explored
@@ -301,22 +302,30 @@ class Solver(ABC):
         # 接下来的操作都要在特征向量上进行
         if self.perference.preferred_teachers:
             for teacher in self.perference.preferred_teachers:
-                for section in self.teachers[teacher]:
-                    section.features[2] = 1
+                for section_c in Sections:
+                    for section_t in self.teachers[teacher]:
+                        if section_c.teacher == section_t.teacher and section_c.time_slot == section_t.time_slot:
+                            section_c.features[1] = 1
+
+                # for section in self.teachers[teacher]:
+                #     print('finish adding one teacher!')
+                #     section.features[1] = 1
+
         # 用户喜欢的时间 
         if self.perference.preferred_times:
             for section in Sections:
                 if set(section.slots) & set(self.perference.preferred_times):
-                    section.features[3] = 1  
+                    section.features[2] = 1  
+
         # 用户对不同课的偏好
         if self.perference.courses_preference:
             for (course, weight) in self.perference.courses_preference:
-                for section in course.sections:
-                    section.features[4] = weight 
+                for section in Sections:
+                    section.features[3] = weight 
 
         # # 处理概率: 选课社区评分 * 概率偏好 + 选课社区评分 * 选上的概率 * (1 - 概率偏好)
         for section in Sections:
-            section.features[0] = section.features[0] * self.perference.prob_preferrence + section.features[0] * section.features[1] * (1 - self.perference.prob_preferrence)
+            section.features[0] = section.features[0] * self.perference.prob_preferrence + section.features[0] * section.prob * (1 - self.perference.prob_preferrence)
             section.rating = self.rating_module(torch.tensor(section.features, dtype=torch.float32)).item()
 
     def update_model(self, rewards: list) -> None:
@@ -630,6 +639,7 @@ class RatingModule(nn.Module):
             raise ValueError("Initial weight tensor has an incorrect size")
 
     def forward(self, x):
+        print(x)
         return self.linear(x)
 
 class ScheduleRating(nn.Module):
@@ -648,15 +658,16 @@ class ScheduleRating(nn.Module):
             outputs.append(self.rating_module(x[i]))
 
         return sum(outputs).squeeze()
-# example
-input_dim = 5
-course_num = 5
-rating_module = RatingModule(input_dim)
-rating_module.set_initial_weight(torch.tensor([1, -1, 0.5, 0.5, 0.5], dtype=torch.float32))
-model = ScheduleRating(course_num, rating_module)
+    
+# # example
+# input_dim = 5
+# course_num = 5
+# rating_module = RatingModule(input_dim)
+# rating_module.set_initial_weight(torch.tensor([1, -1, 0.5, 0.5, 0.5], dtype=torch.float32))
+# model = ScheduleRating(course_num, rating_module)
 
-cirterion = nn.MSELoss()
-optimizer = optim.SGD(model.parameters(), lr=0.001)
+# cirterion = nn.MSELoss()
+# optimizer = optim.SGD(model.parameters(), lr=0.001)
 
 
     
