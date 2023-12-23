@@ -1,5 +1,5 @@
 <h1 align="center">
-ReCourse
+ReCourse(智选课友):
 </h1>
 <p align="center">
   2023 Fall BUSS 3620 人工智能导论大作业
@@ -7,6 +7,7 @@ ReCourse
   李金昊; 卢其汶; 吴苛铭; 熊栩源; 赵霄宇
   <br />
 </p>
+
 
 这是一款可以帮助安泰同学排课的脚本😊
 
@@ -40,8 +41,15 @@ ReCourse
   ```
   pip install Pillow
   pip install pandas
-  pip install PyQt5
+  pip install PyQt5==5.15.10
   ```
+
+​	或者可以按照如下命令一键安装：
+​	```
+​	pip install -r requirements.txt
+​	```
+
+
 
 ## Quickstart
 
@@ -53,17 +61,28 @@ python runner.py
 
 用户可以根据自己的需要选择偏好(如喜好的时间，老师等)：
 
-XXX插入图片()
+XXX插入UI图片
+
+
 
 ## Algorithm
 
-核心算法采用了AC3+forward checking
+核心算法采用了AC3，下面对比了naive，forward checking，AC3算法的性能：
+
+| 选课门数 | naive（探索节点数） | forward checking（探索节点数） | AC3（探索节点数） |
+| -------- | ------------------- | ------------------------------ | ----------------- |
+| n=3      | 217                 | 185                            | **185**           |
+| n=5      | 302                 | 266                            | **264**           |
+| n=10     | 8504                | 4062                           | **4044**          |
+
+可以看到，forward checking已经能有效减少搜索空间，但是针对n或者更加复杂的系统，AC3的表现更佳
 
 ## Update model
 
-本项目的实现基于了一个默认模型，如果想要获得更好的用户体验，可以在运行程序的时候加上参数`is_update`：
+本项目的实现基于了一个初始模型，如果想要获得更好的用户体验，可以在运行程序的时候加上参数`is_update`：
 
 ```
 python runner.py --is_update=True
 ```
 
+这样课程权重模型可以根据你的反馈进行迭代。

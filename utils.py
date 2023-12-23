@@ -10,7 +10,7 @@ import torch.optim as optim
 import os
 
 #####################################################################
-#以下是模型使用到的数据结构
+#以下是本项目使用到的数据结构
 #####################################################################
 
 class Course:
@@ -397,7 +397,7 @@ class Solver(ABC):
         return True
 
     @staticmethod
-    def AC3(unassigned_courses: list, schedule: Schedule) -> bool:
+    def AC3(unassigned_courses: list) -> bool:
         """
         执行弧一致性算法，返回布尔值，如果为False，则说明无解
         """
@@ -414,11 +414,14 @@ class Solver(ABC):
                         bool_list.append(True)
                     else:
                         bool_list.append(False)
-                if all(bool_list) and not bool_list:
+                if all(bool_list):
+                    if len(bool_list) == 0:
+                        print('error!!!')
                     sections_to_remove.append(section1)
                     revised = True
             # Remove sections outside the loop
             for section in sections_to_remove:
+                # print('remove section!!!')
                 course1.sections.remove(section)
             return revised
         
@@ -507,7 +510,7 @@ class optimal_solver(Solver):
         self.best_rating = 0
         self.best_schedule = None
 
-    def solve(self, schedule: Schedule, n: int = 1, flag: bool = True) -> Schedule:
+    def solve(self, schedule: Schedule, n: int = 1, flag: bool = False) -> Schedule:
         """
         @schedule: 一个空的课程表
         @n: 返回最优的n个解
@@ -516,7 +519,15 @@ class optimal_solver(Solver):
         self.preprocess(schedule)
         # 在预处理之后，courses的定义域已经变化，
         courses = copy.deepcopy(self.courses)
-        self.solve_helper(schedule, courses, flag)
+        if flag:
+            # 把课程按照定义域的大小排序,从小到大
+            courses.sort(key=lambda course: len(course.sections))
+        else:
+            # 随机打乱课程
+            random.seed(5201314)
+            random.shuffle(courses)
+
+        self.solve_helper(schedule, courses)
         self.schedule_list.sort(key=lambda schedule: schedule.get_schedule_rating(), reverse=True)
         return self.schedule_list[:n]
     
@@ -533,12 +544,12 @@ class optimal_naive_Solver(optimal_solver):
     def __init__(self, courses: list, perference: UserPreference, teachers: dict):
         super().__init__(courses, perference, teachers)
 
-    def solve_helper(self, schedule: Schedule, courses: list, flag: bool) -> None:
+    def solve_helper(self, schedule: Schedule, courses: list) -> None:
         if len(schedule.courses) == len(self.courses):
             self.schedule_list.append(schedule)
             return None
         
-        course = Solver.select_unassigned_course_MRV(courses) if flag else Solver.select_unassigned_course_random(courses)
+        course = courses[0]
 
         for section in course.sections:
             self.explored += 1
@@ -549,16 +560,18 @@ class optimal_naive_Solver(optimal_solver):
             # 先除去，再拷贝，最后加回
             courses.remove(course)
             new_courses = copy.deepcopy(courses)
-            courses.append(course)
+            # courses.append(course)
+            # 加到第一个位置
+            courses.insert(0, course)
             # new_courses = copy.deepcopy(courses)
-            self.solve_helper(new_schedule, new_courses, flag)
+            self.solve_helper(new_schedule, new_courses)
         return None
 
 class optimal_forward_checking_Solver(optimal_solver):
     def __init__(self, courses: list, perference: UserPreference, teachers: dict):
         super().__init__(courses, perference, teachers)
     
-    def solve_helper(self, schedule: Schedule, courses: list, flag: bool) -> None:
+    def solve_helper(self, schedule: Schedule, courses: list) -> None:
         if len(schedule.courses) == len(self.courses):
             self.schedule_list.append(schedule)
             return None
@@ -569,7 +582,8 @@ class optimal_forward_checking_Solver(optimal_solver):
             return None
         
         # print(f'--{len(courses)}---{len(self.courses)}--{len(schedule.courses)}')
-        course = Solver.select_unassigned_course_MRV(courses) if flag else Solver.select_unassigned_course_random(courses)
+        # course = Solver.select_unassigned_course_MRV(courses) if flag else Solver.select_unassigned_course_random(courses)
+        course = courses[0]
 
         for section in course.sections:
             self.explored += 1
@@ -578,9 +592,10 @@ class optimal_forward_checking_Solver(optimal_solver):
             # 先除去，再拷贝，最后加回
             courses.remove(course)
             new_courses = copy.deepcopy(courses)
-            courses.append(course)
+            # 加到第一个位置
+            courses.insert(0, course)
             # new_courses = copy.deepcopy(courses)
-            self.solve_helper(new_schedule, new_courses, flag)
+            self.solve_helper(new_schedule, new_courses)
         return None
 
 
@@ -589,7 +604,7 @@ class optimal_AC3_Solver(optimal_solver):
         super().__init__(courses, perference, teachers)
 
 
-    def solve_helper(self, schedule: Schedule, courses: list, flag: bool) -> None:
+    def solve_helper(self, schedule: Schedule, courses: list) -> None:
         """
         采用弧一致性缩小算法的搜索范围
         """
@@ -603,11 +618,12 @@ class optimal_AC3_Solver(optimal_solver):
             return None
         
         #再执行AC3算法
-        if not Solver.AC3(courses, schedule):
+        if not Solver.AC3(courses):
             return None
         
         # 选择一个未分配的课程
-        course = Solver.select_unassigned_course_MRV(courses) if flag else Solver.select_unassigned_course_random(courses)
+        # course = Solver.select_unassigned_course_MRV(courses) if flag else Solver.select_unassigned_course_random(courses)
+        course = courses[0]
 
         for section in course.sections:
             self.explored += 1
@@ -617,12 +633,14 @@ class optimal_AC3_Solver(optimal_solver):
             # 先除去，再拷贝，最后加回
             courses.remove(course)
             new_courses = copy.deepcopy(courses)
-            courses.append(course)
+            # 加到第一个位置
+            courses.insert(0, course)
             # new_courses = copy.deepcopy(courses)
-            self.solve_helper(new_schedule, new_courses, flag)
+            self.solve_helper(new_schedule, new_courses)
 
         return None
     
+
 ###########################################################################
 #以下对权重模型的构建
 ###########################################################################
@@ -639,7 +657,7 @@ class RatingModule(nn.Module):
             raise ValueError("Initial weight tensor has an incorrect size")
 
     def forward(self, x):
-        print(x)
+        # print(x)
         return self.linear(x)
 
 class ScheduleRating(nn.Module):

@@ -1,0 +1,5 @@
+numpy
+Pillow
+torch
+pandas
+PyQt5==5.15.10
