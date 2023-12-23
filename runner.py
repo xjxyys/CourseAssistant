@@ -216,15 +216,6 @@ def confirmAll():
     for i in range(len(optimal_schedule)):
         optimal_schedule[i].draw(i+1)
 
-    #### 是否要更新模型，如果需要，请在运行程序时加上参数 --is_update=True
-    if is_update:
-        rewards = get_rewards()
-        solver.update_model(rewards)
-        if rewards == [1, 2]:
-            QMessageBox.information(None, '提示', '谢谢您的反馈！')
-        else:
-            QMessageBox.information(None, '提示', '谢谢您的反馈，模型已更新')
-
     
     MainWindow = QDialog()
     out_interface = out.Ui_MainWindow()
