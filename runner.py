@@ -171,9 +171,9 @@ def confirmAll():
     '''
     for ru in ui.content:
         if ru[0] == 'like_time':
-            userpreference.add_preferred_time(int(ru[1][0]),int(ru[1][1]),int(ru[1][2]))
+            userpreference.add_preferred_time(int(ru[1][0])-1,int(ru[1][1])-1,int(ru[1][2])-1)
         elif ru[0] == 'dislike_time':
-            userpreference.add_not_preferred_time(int(ru[1][0]),int(ru[1][1]),int(ru[1][2]))
+            userpreference.add_not_preferred_time(int(ru[1][0])-1,int(ru[1][1])-1,int(ru[1][2])-1)
         elif ru[0] == 'like_teacher':
             # print('adding a teacher!')
             userpreference.add_preferred_teacher(ru[1])
