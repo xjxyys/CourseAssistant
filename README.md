@@ -43,13 +43,10 @@ ReCourse(智选课友):
   pip install pandas
   pip install PyQt5==5.15.10
   ```
-
-​	或者可以按照如下命令一键安装：
-​	```
-​	pip install -r requirements.txt
-​	```
-
-
+  或者可以按照如下命令一键安装：
+  ```
+  pip install -r requirements.txt
+  ```
 
 ## Quickstart
 
