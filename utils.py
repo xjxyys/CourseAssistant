@@ -75,7 +75,7 @@ class UserPreference:
         self.not_preferred_times = []  # 不喜欢的时间
         self.preferred_teachers = [] # 喜欢的老师
         self.courses_preference = [] # 课程偏好
-        self.prob_preferrence = 0.5 # 概率偏好，越大越赌狗
+        self.prob_preferrence = 0 # 概率偏好，越大越赌狗
     
     # 添加的method
     def add_preferred_time(self, week:int, day:int, time:int) -> None:
@@ -144,7 +144,7 @@ class Schedule:
         head = 300 # 第一行高度
         height = 400 # 其他行高度 
         left = 200 # 第一列宽度
-        width = 600 # 其他列宽度
+        width = 800 # 其他列宽度
         border = 10 # 边界宽度
         white = (237, 240, 252)
         black = (0, 0, 0)
