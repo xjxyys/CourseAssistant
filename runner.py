@@ -4,7 +4,7 @@ import out
 import pandas as pd
 import spider
 import itertools
-from PyQt5.QtWidgets import QApplication, QMainWindow, QInputDialog, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QInputDialog, QMessageBox,QWidget,QDialog
 from PyQt5 import QtCore
 from utils import *
 import os
@@ -206,7 +206,7 @@ def confirmAll():
     if len(optimal_schedule)==0:
         QMessageBox.information(None, '提示', '没有可行的课表，请重新输入!')
         return
-    QMessageBox.information(None, '提示', '已生成课表，请在out文件夹中查看！')
+    #QMessageBox.information(None, '提示', '已生成课表，请在out文件夹中查看！')
     schedule_rating = optimal_schedule[0].get_schedule_rating()
     print(f'--------------- rating: {schedule_rating} --and--explored: {solver.explored} ---------------')
     #optimal_schedule[0].draw()
@@ -226,10 +226,10 @@ def confirmAll():
             QMessageBox.information(None, '提示', '谢谢您的反馈，模型已更新')
 
     
-    MainWindow = QMainWindow()
+    MainWindow = QDialog()
     out_interface = out.Ui_MainWindow()
     out_interface.setupUi(MainWindow)
-    MainWindow.show()
+    MainWindow.exec()
     #sys.exit(app.exec_())
 
 
