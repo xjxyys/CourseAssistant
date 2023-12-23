@@ -1,8 +1,8 @@
 <h1 align="center">
-益选课友:（这个标题真是糖的出奇啊！！！）
+ReCourse
 </h1>
 <p align="center">
-  2023 Fall BUSS 3602 人工智能导论大作业
+  2023 Fall BUSS 3620 人工智能导论大作业
   <br />
   李金昊; 卢其汶; 吴苛铭; 熊栩源; 赵霄宇
   <br />
