@@ -231,8 +231,14 @@ def confirmAll():
     out_interface.setupUi(MainWindow)
     MainWindow.exec()
     #sys.exit(app.exec_())
-
-
+    #### 是否要更新模型，如果需要，请在运行程序时加上参数 --is_update=True
+    if is_update:
+        rewards = get_rewards()
+        solver.update_model(rewards)
+        if rewards == [1, 2]:
+            QMessageBox.information(None, '提示', '谢谢您的反馈！')
+        else:
+            QMessageBox.information(None, '提示', '谢谢您的反馈，模型已更新')
 
 
 if __name__ == '__main__':
