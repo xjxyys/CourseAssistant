@@ -93,7 +93,7 @@ def showPreferredTime():
     ui.widget_5.hide()
     ui.widget_6.hide()
     ui.widget_7.hide()
-    ui.label_7.hide()
+    #ui.label_7.hide()
 
 def showDislikedTime():
     ui.widget_2.hide()
@@ -102,7 +102,7 @@ def showDislikedTime():
     ui.widget_5.hide()
     ui.widget_6.hide()
     ui.widget_7.hide()
-    ui.label_12.hide()
+    #ui.label_12.hide()
 
 def showPreferredTeacher():
     ui.widget_2.hide()
@@ -111,7 +111,7 @@ def showPreferredTeacher():
     ui.widget_5.hide()
     ui.widget_6.hide()
     ui.widget_7.hide()
-    ui.label_14.hide()
+    #ui.label_14.hide()
 
 def showSelectiveCourses():
     ui.widget_2.hide()
@@ -120,7 +120,7 @@ def showSelectiveCourses():
     ui.widget_5.show()
     ui.widget_6.hide()
     ui.widget_7.hide()
-    ui.label_16.hide()
+    #ui.label_16.hide()
 
 def showPreferredProb():
     ui.widget_2.hide()
@@ -138,7 +138,7 @@ def showCoursePreference():
     ui.widget_5.hide()
     ui.widget_6.hide()
     ui.widget_7.show()
-    ui.label_23.hide()
+    #ui.label_23.hide()
 
 
 def confirmAll():

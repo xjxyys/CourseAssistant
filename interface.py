@@ -164,11 +164,12 @@ class Ui_MainWindow(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.gridLayout.addWidget(self.comboBox, 2, 0, 1, 1)
+        '''
         self.pushButton_5 = QtWidgets.QPushButton(self.widget_2)
         self.pushButton_5.setEnabled(True)
         self.pushButton_5.setStyleSheet("hide;")
         self.pushButton_5.setObjectName("pushButton_5")
-        self.gridLayout.addWidget(self.pushButton_5, 3, 0, 1, 3)
+        self.gridLayout.addWidget(self.pushButton_5, 3, 0, 1, 3)'''
         self.comboBox_2 = QtWidgets.QComboBox(self.widget_2)
         self.comboBox_2.setEnabled(True)
         self.comboBox_2.setMaxVisibleItems(6)
@@ -209,9 +210,9 @@ class Ui_MainWindow(object):
         self.label_3.setEnabled(True)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 0, 0, 1, 2)
-        self.label_7 = QtWidgets.QLabel(self.widget_2)
-        self.label_7.setObjectName("label_7")
-        self.gridLayout.addWidget(self.label_7, 5, 0, 1, 2)
+        #self.label_7 = QtWidgets.QLabel(self.widget_2)
+        #self.label_7.setObjectName("label_7")
+        #self.gridLayout.addWidget(self.label_7, 5, 0, 1, 2)
         self.label_4 = QtWidgets.QLabel(self.widget_2)
         self.label_4.setEnabled(True)
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
@@ -231,11 +232,12 @@ class Ui_MainWindow(object):
         self.pushButton_8.setEnabled(True)
         self.pushButton_8.setObjectName("pushButton_8")
         self.gridLayout_2.addWidget(self.pushButton_8, 4, 0, 1, 3)
+        '''
         self.pushButton_7 = QtWidgets.QPushButton(self.widget_3)
         self.pushButton_7.setEnabled(True)
         self.pushButton_7.setStyleSheet("hide;")
         self.pushButton_7.setObjectName("pushButton_7")
-        self.gridLayout_2.addWidget(self.pushButton_7, 3, 0, 1, 3)
+        self.gridLayout_2.addWidget(self.pushButton_7, 3, 0, 1, 3)'''
         self.comboBox_6 = QtWidgets.QComboBox(self.widget_3)
         self.comboBox_6.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -263,9 +265,9 @@ class Ui_MainWindow(object):
         self.comboBox_6.addItem("")
         self.comboBox_6.addItem("")
         self.gridLayout_2.addWidget(self.comboBox_6, 2, 0, 1, 1)
-        self.label_12 = QtWidgets.QLabel(self.widget_3)
-        self.label_12.setObjectName("label_12")
-        self.gridLayout_2.addWidget(self.label_12, 5, 0, 1, 2)
+        #self.label_12 = QtWidgets.QLabel(self.widget_3)
+        #self.label_12.setObjectName("label_12")
+        #self.gridLayout_2.addWidget(self.label_12, 5, 0, 1, 2)
         self.label_8 = QtWidgets.QLabel(self.widget_3)
         self.label_8.setEnabled(True)
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
@@ -322,18 +324,19 @@ class Ui_MainWindow(object):
         self.gridLayout_3 = QtWidgets.QGridLayout(self.widget_4)
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_3.setObjectName("gridLayout_3")
+        '''
         self.pushButton_9 = QtWidgets.QPushButton(self.widget_4)
         self.pushButton_9.setObjectName("pushButton_9")
-        self.gridLayout_3.addWidget(self.pushButton_9, 3, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.pushButton_9, 3, 0, 1, 1)'''
         self.pushButton_10 = QtWidgets.QPushButton(self.widget_4)
         self.pushButton_10.setObjectName("pushButton_10")
         self.gridLayout_3.addWidget(self.pushButton_10, 4, 0, 1, 1)
         self.textEdit = QtWidgets.QTextEdit(self.widget_4)
         self.textEdit.setObjectName("textEdit")
         self.gridLayout_3.addWidget(self.textEdit, 2, 0, 1, 1)
-        self.label_14 = QtWidgets.QLabel(self.widget_4)
-        self.label_14.setObjectName("label_14")
-        self.gridLayout_3.addWidget(self.label_14, 5, 0, 1, 1)
+        #self.label_14 = QtWidgets.QLabel(self.widget_4)
+        #self.label_14.setObjectName("label_14")
+        #self.gridLayout_3.addWidget(self.label_14, 5, 0, 1, 1)
         self.label_13 = QtWidgets.QLabel(self.widget_4)
         self.label_13.setObjectName("label_13")
         self.gridLayout_3.addWidget(self.label_13, 0, 0, 1, 1)
@@ -397,9 +400,10 @@ class Ui_MainWindow(object):
         self.comboBox_7.setObjectName("comboBox_7")
         self.comboBox_7.addItem("")
         self.gridLayout_5.addWidget(self.comboBox_7, 2, 0, 1, 1)
+        '''
         self.pushButton_16 = QtWidgets.QPushButton(self.widget_7)
         self.pushButton_16.setObjectName("pushButton_16")
-        self.gridLayout_5.addWidget(self.pushButton_16, 3, 0, 1, 2)
+        self.gridLayout_5.addWidget(self.pushButton_16, 3, 0, 1, 2)'''
         self.spinBox_2 = QtWidgets.QSpinBox(self.widget_7)
         self.spinBox_2.setObjectName("spinBox_2")
         self.spinBox_2.setMaximum(10)
@@ -410,9 +414,9 @@ class Ui_MainWindow(object):
         self.label_20 = QtWidgets.QLabel(self.widget_7)
         self.label_20.setObjectName("label_20")
         self.gridLayout_5.addWidget(self.label_20, 0, 0, 1, 2)
-        self.label_23 = QtWidgets.QLabel(self.widget_7)
-        self.label_23.setObjectName("label_23")
-        self.gridLayout_5.addWidget(self.label_23, 5, 0, 1, 2)
+        #self.label_23 = QtWidgets.QLabel(self.widget_7)
+        #self.label_23.setObjectName("label_23")
+        #self.gridLayout_5.addWidget(self.label_23, 5, 0, 1, 2)
         
         self.line_6 = QtWidgets.QFrame(self.centralwidget)
         self.line_6.setGeometry(QtCore.QRect(270, 130, 20, 240))
@@ -487,16 +491,16 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.pushButton_5.clicked.connect(self.label_7.hide) # type: ignore
-        self.pushButton_6.clicked.connect(self.label_7.show) # type: ignore
-        self.pushButton_7.clicked.connect(self.label_12.hide) # type: ignore
-        self.pushButton_8.clicked.connect(self.label_12.show) # type: ignore
+        #self.pushButton_5.clicked.connect(self.label_7.hide) # type: ignore
+        #self.pushButton_6.clicked.connect(self.label_7.show) # type: ignore
+        #self.pushButton_7.clicked.connect(self.label_12.hide) # type: ignore
+        #self.pushButton_8.clicked.connect(self.label_12.show) # type: ignore
         self.pushButton_15.clicked.connect(self.label_19.show) # type: ignore
-        self.pushButton_10.clicked.connect(self.label_14.show) # type: ignore
-        self.pushButton_9.clicked.connect(self.label_14.hide) # type: ignore
-        self.pushButton_9.clicked.connect(self.textEdit.clear) # type: ignore
+        #self.pushButton_10.clicked.connect(self.label_14.show) # type: ignore
+        #self.pushButton_9.clicked.connect(self.label_14.hide) # type: ignore
+        #self.pushButton_9.clicked.connect(self.textEdit.clear) # type: ignore
         # self.pushButton_11.clicked.connect(self.label_16.show) # type: ignore
-        self.pushButton_17.clicked.connect(self.label_23.show) # type: ignore
+        #self.pushButton_17.clicked.connect(self.label_23.show) # type: ignore
         # self.pushButton_16.clicked.connect(self.label_23.hide) # type: ignore
         self.pushButton_15.clicked.connect(self.change_pro)
         # self.pushButton_11.clicked.connect(self.change_sel)
@@ -791,7 +795,7 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(14, _translate("MainWindow", "14"))
         self.comboBox.setItemText(15, _translate("MainWindow", "15"))
         self.comboBox.setItemText(16, _translate("MainWindow", "16"))
-        self.pushButton_5.setText(_translate("MainWindow", "ADD a new preferred time"))
+        #self.pushButton_5.setText(_translate("MainWindow", "ADD a new preferred time"))
         self.comboBox_2.setItemText(0, _translate("MainWindow", "Select"))
         self.comboBox_2.setItemText(1, _translate("MainWindow", "1"))
         self.comboBox_2.setItemText(2, _translate("MainWindow", "2"))
@@ -815,10 +819,10 @@ class Ui_MainWindow(object):
         self.comboBox_3.setItemText(13, _translate("MainWindow", "13"))
         self.comboBox_3.setItemText(14, _translate("MainWindow", "14"))
         self.label_3.setText(_translate("MainWindow", "Add Preferred Time"))
-        self.label_7.setText(_translate("MainWindow", "Successfully Added to Preferred Time!"))
+        #self.label_7.setText(_translate("MainWindow", "Successfully Added to Preferred Time!"))
         self.label_4.setText(_translate("MainWindow", "Week"))
         self.pushButton_8.setText(_translate("MainWindow", "Confirm"))
-        self.pushButton_7.setText(_translate("MainWindow", "ADD a new disliked time"))
+        #self.pushButton_7.setText(_translate("MainWindow", "ADD a new disliked time"))
         self.comboBox_6.setItemText(0, _translate("MainWindow", "Select"))
         self.comboBox_6.setItemText(1, _translate("MainWindow", "1"))
         self.comboBox_6.setItemText(2, _translate("MainWindow", "2"))
@@ -836,7 +840,7 @@ class Ui_MainWindow(object):
         self.comboBox_6.setItemText(14, _translate("MainWindow", "14"))
         self.comboBox_6.setItemText(15, _translate("MainWindow", "15"))
         self.comboBox_6.setItemText(16, _translate("MainWindow", "16"))
-        self.label_12.setText(_translate("MainWindow", "Successfully Added to Disliked Time!"))
+        #self.label_12.setText(_translate("MainWindow", "Successfully Added to Disliked Time!"))
         self.label_8.setText(_translate("MainWindow", "Week"))
         self.comboBox_5.setItemText(0, _translate("MainWindow", "Select"))
         self.comboBox_5.setItemText(1, _translate("MainWindow", "1"))
@@ -862,9 +866,9 @@ class Ui_MainWindow(object):
         self.comboBox_4.setItemText(5, _translate("MainWindow", "5"))
         self.label_10.setText(_translate("MainWindow", "Day"))
         self.label_9.setText(_translate("MainWindow", "Time"))
-        self.pushButton_9.setText(_translate("MainWindow", "ADD a new preferred teacher"))
+        #self.pushButton_9.setText(_translate("MainWindow", "ADD a new preferred teacher"))
         self.pushButton_10.setText(_translate("MainWindow", "Confirm"))
-        self.label_14.setText(_translate("MainWindow", "Successfully Added to Preferred Time!"))
+        #self.label_14.setText(_translate("MainWindow", "Successfully Added to Preferred Time!"))
         self.label_13.setText(_translate("MainWindow", "Add Preferred Teacher"))
         # self.label_16.setText(_translate("MainWindow", "Successfully Added to Number of Selective Courses!"))
         # self.pushButton_11.setText(_translate("MainWindow", "Confirm"))
@@ -877,10 +881,10 @@ class Ui_MainWindow(object):
         self.label_21.setText(_translate("MainWindow", "Course Name"))
         self.label_22.setText(_translate("MainWindow", "Preference(0~10)"))
         self.comboBox_7.setItemText(0, _translate("MainWindow", "Select"))
-        self.pushButton_16.setText(_translate("MainWindow", "Add a new preference"))
+        #self.pushButton_16.setText(_translate("MainWindow", "Add a new preference"))
         self.pushButton_17.setText(_translate("MainWindow", "Confirm"))
         self.label_20.setText(_translate("MainWindow", "Add Course Preference"))
-        self.label_23.setText(_translate("MainWindow", "Successfully Added to Course Preference!"))
+        #self.label_23.setText(_translate("MainWindow", "Successfully Added to Course Preference!"))
 
         self.prefer_pro.setText(_translate("MainWindow", "Preferred Probability: 0"))
         # self.sele_course.setText(_translate("MainWindow", "Number of Selective Courses: 0"))
