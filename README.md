@@ -58,7 +58,7 @@ python runner.py
 
 用户可以根据自己的需要选择偏好(如喜好的时间，老师等)：
 
-![interface](fig\interface.png)
+![interface](fig/interface.png)
 
 点击`confirm all selections`即可确认输入，等待算法生成课表。
 
