@@ -103,7 +103,7 @@ class Schedule:
     def __init__(self) -> None:
         self.courses = [] # 存储Course对象
         self.sections = []  # 存储Section对象
-        self.slots_state = np.ones((16, 5, 13)) # 用三维数组表示该时间段是否可用，16周，5天，13节课，可用为1否则为0
+        self.slots_state = np.ones((16, 5, 14)) # 用三维数组表示该时间段是否可用，16周，5天，13节课，可用为1否则为0
 
     def get_schedule_features(self) -> torch.tensor:
         return torch.stack([torch.tensor(section.features, dtype=torch.float32) for section in self.sections])
@@ -208,7 +208,6 @@ class Solver(ABC):
     def __init__(self, courses: list, perference: UserPreference, teachers: dict) -> None:
         # 需要对课程进行拷贝，否则会改变原来的课程
         self.courses = copy.deepcopy(courses) # 未分配的课程
-        # self.schedule = schedule # 一个空的课程表，这是一个动态的概念
         self.teachers = teachers 
         self.perference = perference
         self.explored = 0 # 已经探索的节点数
