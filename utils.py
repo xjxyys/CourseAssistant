@@ -218,7 +218,7 @@ class Solver(ABC):
             # self.rating_module = RatingModule(5)
             self.rating_module = RatingModule(4)
         
-        self.rating_module.set_initial_weight(torch.tensor([1, 2, 2, 1], dtype=torch.float32))
+        self.rating_module.set_initial_weight(torch.tensor([1, 3, 2, 1], dtype=torch.float32))
     
     def get_explored(self) -> int:
         return self.explored
@@ -304,7 +304,7 @@ class Solver(ABC):
                 for section_c in Sections:
                     for section_t in self.teachers[teacher]:
                         if section_c.teacher == section_t.teacher and section_c.time_slot == section_t.time_slot:
-                            section_c.features[1] = 2
+                            section_c.features[1] = 1
 
                 # for section in self.teachers[teacher]:
                 #     print('finish adding one teacher!')
