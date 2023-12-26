@@ -1,5 +1,5 @@
 <h1 align="center">
-ReCourse(智选课友): An AI-driven Course Timetable Comapnion for ACEM
+ReCourse(智选课友): An AI-driven Course Timetable Companion for ACEM
 </h1>
 <p align="center">
   2023 Fall BUSS 3620 人工智能导论大作业
