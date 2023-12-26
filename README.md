@@ -88,6 +88,8 @@ python runner.py --is_update=True
 
 可以看到，forward checking已经能有效减少搜索空间，但是针对n较大或者更加复杂的系统，AC3的表现更佳
 
+你可以通过`python test.py`来重现上述实验。
+
 ### Cross Supervision
 
 更新权重模型时，采用了**交叉监督(原创)**的方法。如果用户需要反馈并更新模型，会根据现在最优和次优课表的评分进行交叉监督。
